@@ -21,20 +21,6 @@ const authProvider = {
           });
 
         inMemoryJWT.setRefreshTokenEndpoint('auth/realms/formed-api/protocol/openid-connect/token');
-        
-        // return fetch(request)
-        // .then(response => {
-        //   if (response.status < 200 || response.status >= 300) {
-        //     throw new Error(response.statusText);
-        //   }
-        //   return response.json();
-        // })
-        // .then(token => {
-        //   localStorage.setItem('token', JSON.stringify(token));
-        // })
-        // .catch(() => {
-        //   throw new Error('Network error')
-        // });
 
         return fetch(request)
             .then((response) => {
@@ -43,17 +29,27 @@ const authProvider = {
                 }
                 return response.json();
             })
-            .then(( token ) => {
+            .then((token) => {
                 console.log(token);
-                // return inMemoryJWT.setToken(token, tokenExpiry);
+                return inMemoryJWT.setToken(token.access_token, token.expires_in, token.refresh_token);
             });
     },
 
     logout: () => {
-        const request = new Request('http://localhost:8001/logout', {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            credentials: 'include',
+        const details = {
+            'client_id': 'frontend',
+            'refresh_token': inMemoryJWT.getToken(true)
+          };
+
+        const formBody = Object.entries(details).map(([key, value]) => 
+            encodeURIComponent(key) + '=' + encodeURIComponent(value)).join('&')
+
+        const request = new Request('auth/realms/formed-api/protocol/openid-connect/logout', {
+            method: 'POST',
+            body: formBody,
+            headers: new Headers({ 
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            }),
         });
         inMemoryJWT.ereaseToken();
 

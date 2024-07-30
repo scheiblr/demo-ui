@@ -52,18 +52,19 @@ const inMemoryJWTManager = () => {
 
         isRefreshing = fetch(request)
             .then((response) => {
+                console.log(response);
                 if (response.status !== 200) {
                     ereaseToken();
-                    global.console.log(
+                    console.log(
                         'Token renewal failure'
                     );
                     return { token: null };
                 }
                 return response.json();
             })
-            .then(({ token, tokenExpiry }) => {
+            .then(( token ) => {
                 if (token) {
-                    setToken(token, tokenExpiry);
+                    setToken(token.access_token, token.expires_in, token.refresh_token);
                     return true;
                 }
                 ereaseToken();
@@ -73,17 +74,18 @@ const inMemoryJWTManager = () => {
         return isRefreshing;
     };
 
+    const getToken = (refresh) => (refresh) ? inMemoryRefreshToken : inMemoryJWT;
 
-    const getToken = () => inMemoryJWT;
-
-    const setToken = (token, delay) => {
+    const setToken = (token, delay, rToken) => {
         inMemoryJWT = token;
+        inMemoryRefreshToken = rToken;
         refreshToken(delay);
         return true;
     };
 
     const ereaseToken = () => {
         inMemoryJWT = null;
+        inMemoryRefreshToken = null;
         abordRefreshToken();
         window.localStorage.setItem(logoutEventName, Date.now());
         return true;

@@ -11,15 +11,17 @@ import DocumentList from './components/Documents/List';
 import DocumentShow from './components/Documents/Show';
 import PatientShow from './components/Patient/Show';
 import PatientList from './components/Patient/List';
-
+import inMemoryJWT from './inMemoryJWT';
 import Footer from './components/Footer';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
       options.headers = new Headers({ Accept: 'application/json' });
   }
-  const access_token = getAccessToken();
-  options.headers.set('Authorization', `Bearer ${access_token}`);
+  const token = inMemoryJWT.getToken();
+  if (token) {
+    options.headers.set('Authorization', `Bearer ${token}`);
+  }
   return fetchUtils.fetchJson(url, options);
 };
 
