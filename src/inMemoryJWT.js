@@ -43,11 +43,15 @@ const inMemoryJWTManager = () => {
             'client_id': 'frontend'
           };
 
+        const formBody = Object.entries(details).map(([key, value]) => 
+            encodeURIComponent(key) + '=' + encodeURIComponent(value)).join('&');
 
         const request = new Request(refreshEndpoint, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            credentials: 'include',
+            method: 'POST',
+            body: formBody,
+            headers: new Headers({ 
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            }),
         });
 
         isRefreshing = fetch(request)
