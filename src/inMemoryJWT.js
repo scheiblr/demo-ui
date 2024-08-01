@@ -56,7 +56,6 @@ const inMemoryJWTManager = () => {
 
         isRefreshing = fetch(request)
             .then((response) => {
-                console.log(response);
                 if (response.status !== 200) {
                     ereaseToken();
                     console.log(
