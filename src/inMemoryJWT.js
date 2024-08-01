@@ -32,7 +32,7 @@ const inMemoryJWTManager = () => {
             isRefreshing = null;
             return true;
         });
-    }
+    };
 
     // The method make a call to the refresh-token endpoint
     // If there is a valid cookie, the endpoint will set a fresh jwt in memory.
@@ -92,7 +92,7 @@ const inMemoryJWTManager = () => {
         abordRefreshToken();
         window.localStorage.setItem(logoutEventName, Date.now());
         return true;
-    }
+    };
 
     // This listener will allow to disconnect a session of ra started in another tab
     window.addEventListener('storage', (event) => {
@@ -109,7 +109,7 @@ const inMemoryJWTManager = () => {
         setRefreshTokenEndpoint,
         setToken,
         waitForTokenRefresh,
-    }
+    };
 };
 
 export default inMemoryJWTManager();
