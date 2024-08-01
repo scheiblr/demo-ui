@@ -29,14 +29,14 @@ const FilterSidebar = props => (
   </Card>
 );
 
-const TextFielHighlights = ({ record, source, ...rest }) => (
+const TextFieldHighlights = ({ record, source, ...rest }) => (
   <div dangerouslySetInnerHTML={{__html:record[source].join(' ... ')}} />
 );
 
 const DocumentGrid = props => (
   <Datagrid {...props}>
     <TextField source="txid" />
-    <TextFielHighlights source="search_text_highlighted" label="Content" />
+    <TextFieldHighlights source="search_text_highlighted" label="Content" />
     <TextField source="entry_type" label="Type" />
   </Datagrid>
 );
