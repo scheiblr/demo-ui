@@ -30,7 +30,6 @@ const authProvider = {
                 return response.json();
             })
             .then((token) => {
-                console.log(token);
                 return inMemoryJWT.setToken(token.access_token, token.expires_in, token.refresh_token);
             });
     },
