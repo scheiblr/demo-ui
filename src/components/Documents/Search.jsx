@@ -5,7 +5,8 @@ import {
   List, 
   Datagrid, 
   TextField, 
-  FilterLiveSearch
+  FilterLiveSearch,
+  useRecordContext
 } from 'react-admin';
 
 const Card = withStyles(theme => ({
@@ -24,14 +25,15 @@ const Card = withStyles(theme => ({
 const FilterSidebar = props => (
   <Card>
       <CardContent>
-          <FilterLiveSearch source="query" />
+          <FilterLiveSearch source="query" label="Search" />
       </CardContent>
   </Card>
 );
 
-const TextFieldHighlights = ({ record, source, ...rest }) => (
-  <div dangerouslySetInnerHTML={{__html:record[source].join(' ... ')}} />
-);
+const TextFieldHighlights = ({source}) => {
+  const record = useRecordContext();
+  return (<div dangerouslySetInnerHTML={{__html:record && record[source].join(' ... ')}} />);
+};
 
 const DocumentGrid = props => (
   <Datagrid {...props}>
