@@ -12,7 +12,6 @@ import DocumentShow from './components/Documents/Show';
 import PatientShow from './components/Patient/Show';
 import PatientList from './components/Patient/List';
 import inMemoryJWT from './inMemoryJWT';
-import Footer from './components/Footer';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -51,7 +50,6 @@ const App = () => (
       <Resource name="patients" show={PatientShow} list={PatientList} />
       <Resource name="visits" />
       <Resource name="observations" />
-      <Footer />
     </Admin>
   </React.Fragment>
 );
