@@ -40,11 +40,10 @@ const PatientList = props => {
   return (
     <List
       filters={<PatientFilter/>}
-      bulkActionButtons={false}
       actions={<PatientListActions />}
       {...props}
     >
-      <Datagrid rowClick="show" {...props}>
+      <Datagrid rowClick="show" bulkActionButtons={false} {...props}>
         <TextField source="patient_num" label="Patient No" />
         <TextField source="name" label="Dummy Name" />
         <TextField source="sex" label="Gender" />

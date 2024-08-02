@@ -17,11 +17,11 @@ const DocumentGrid = props => (
 const DocumentList = props => {
   return (
     <List
-      bulkActionButtons={false}
       actions={null}
       {...props}
     >
       <DocumentGrid 
+        bulkActionButtons={false}
         style={{tableLayout: 'fixed'}} 
         rowClick="show" 
         {...props} />

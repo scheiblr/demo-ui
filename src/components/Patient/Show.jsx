@@ -24,7 +24,9 @@ const Obervations = (props)  => (
         label="Visits"
         pagination={<Pagination />}
       >
-        <Datagrid style={{tableLayout: 'fixed'}}>
+        <Datagrid
+          bulkActionButtons={false}
+          style={{tableLayout: 'fixed'}}>
           <TextField source="dimcode" />
           <TextField source="concept_code" />
           <TextField source="value" />
@@ -48,7 +50,10 @@ const PatientShow = props => (
             label="Visits"
             pagination={<Pagination />}
           >
-            <Datagrid style={{tableLayout: 'fixed'}} expand={<Obervations />}>
+            <Datagrid 
+              bulkActionButtons={false}
+              style={{tableLayout: 'fixed'}}
+              expand={<Obervations />}>
               <TextField source="encounter_num" />
               <TextField source="inout_cd" />
               <DateField source="start_date" />
@@ -65,6 +70,7 @@ const PatientShow = props => (
             pagination={<Pagination rowsPerPageOptions={[1]}/>}
           >
             <Datagrid
+              bulkActionButtons={false}
               rowClick={(id, basePath, record) => `${basePath}/${record.txid}/show`} 
               style={{tableLayout: 'fixed'}} >
               <RichTextField component="pre" source="document" />
