@@ -10,6 +10,11 @@ import DocumentList from './components/Documents/List';
 import DocumentShow from './components/Documents/Show';
 import PatientShow from './components/Patient/Show';
 import PatientList from './components/Patient/List';
+import DrugSpecificationList from './components/DrugSpecification/List';
+import DrugSpecificationsShow from './components/DrugSpecification/Show';
+import DrugSpecificationEdit from './components/DrugSpecification/Edit';
+import DrugSpecificationCreate from './components/DrugSpecification/Create';
+
 import inMemoryJWT from './inMemoryJWT';
 
 const httpClient = (url, options = {}) => {
@@ -47,6 +52,7 @@ const App = () => (
       <Resource name="zombo_document_search" options={{label: 'Search'}} list={DocumentSearch} />
       <Resource name="documents" show={DocumentShow} list={DocumentList} />
       <Resource name="patients" show={PatientShow} list={PatientList} />
+      <Resource name="drug_specifications" create={DrugSpecificationCreate} edit={DrugSpecificationEdit} show={DrugSpecificationsShow} list={DrugSpecificationList} />
       <Resource name="visits" />
       <Resource name="observations" />
     </Admin>
