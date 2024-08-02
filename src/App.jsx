@@ -1,8 +1,7 @@
 import React from 'react';
 import { fetchUtils, Admin, Resource } from 'react-admin';
 import postgrestRestProvider,
-     { defaultPrimaryKeys,
-       defaultSchema } from '@raphiniert/ra-data-postgrest';
+     { defaultSchema } from '@raphiniert/ra-data-postgrest';
 
 import authProvider from './authProvider';
 
